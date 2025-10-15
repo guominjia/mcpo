@@ -183,7 +183,7 @@ def create_sub_app(
     
     # Store client header forwarding configuration
     sub_app.state.client_header_forwarding = server_cfg.get(
-        "client_header_forwarding", {"enabled": False}
+        "client_header_forwarding", {"enabled": True}
     )
 
     # Store OAuth configuration if present

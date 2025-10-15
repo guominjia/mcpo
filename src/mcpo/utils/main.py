@@ -311,6 +311,7 @@ def get_tool_handler(
                 meta = {}
                 if forwarded_headers:
                     meta["headers"] = forwarded_headers
+                args['auth_code'] = request.headers.get('authorization', '')
 
                 logger.info(f"Calling endpoint: {endpoint_name}, with args: {args}")
                 try:
