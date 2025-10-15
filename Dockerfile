@@ -1,5 +1,13 @@
 FROM python:3.12-slim-bookworm
 
+ARG http_proxy
+ARG https_proxy
+ARG no_proxy
+
+ENV http_proxy=$http_proxy
+ENV https_proxy=$https_proxy
+ENV no_proxy=$no_proxy
+
 # Install uv (from official binary), nodejs, npm, and git
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 

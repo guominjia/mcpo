@@ -6,6 +6,14 @@ mcpo is a dead-simple proxy that takes an MCP server command and makes it access
 
 No custom protocol. No glue code. No hassle.
 
+## Porting for special case
+
+Build local-mcpo docker image with proxy
+
+```bash
+docker build -t local-mcpo:main --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy --build-arg no_proxy=$no_proxy .
+```
+
 ## 🤔 Why Use mcpo Instead of Native MCP?
 
 MCP servers usually speak over raw stdio, which is:
