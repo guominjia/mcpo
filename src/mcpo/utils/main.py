@@ -280,6 +280,7 @@ def get_tool_handler(
     form_model_fields,
     response_model_fields=None,
     client_header_forwarding_config=None,
+    api_key=None,
 ):
     if form_model_fields:
         FormModel = create_model(f"{endpoint_name}_form_model", **form_model_fields)
@@ -311,7 +312,10 @@ def get_tool_handler(
                 meta = {}
                 if forwarded_headers:
                     meta["headers"] = forwarded_headers
-                args['auth_code'] = request.headers.get('authorization', '')
+
+                if f"Bearer {api_key}" != request.headers.get('authorization', ''):
+                    logger.info("Adding auth_code to args")
+                    args['auth_code'] = request.headers.get('authorization', '')
 
                 logger.info(f"Calling endpoint: {endpoint_name}, with args: {args}")
                 try:

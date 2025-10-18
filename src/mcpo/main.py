@@ -189,6 +189,8 @@ def create_sub_app(
     # Store OAuth configuration if present
     sub_app.state.oauth_config = server_cfg.get("oauth")
 
+    # Store the API key for potential use in handlers
+    sub_app.state.api_key = api_key
 
     return sub_app
 
@@ -405,6 +407,7 @@ async def create_dynamic_endpoints(app: FastAPI, api_dependency=None):
             form_model_fields,
             response_model_fields,
             client_header_forwarding_config,
+            api_key=app.state.api_key
         )
 
         app.post(
